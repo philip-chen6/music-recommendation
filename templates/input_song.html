@@ -3,34 +3,32 @@
 {% block title %}Input a Song and an Artist{% endblock %}
 
 {% block content %}
-<div style="display: block;">
-<div id="grid-container">
-<div id="input-form">
+
 <p>Enter a song, an artist, and a number of songs, and click "submit" to generate multiple songs from all types of genres that you might like!</p>
-<form action="/input_song" method="post">
-<label for="song">Song:</label>
-<input id="song" name="song" placeholder="song" type="text"/>
-<label for="artist">Artist:</label>
-<input id="artist" name="artist" placeholder="artist" type="text"/>
-<label for="number">Number of Songs:</label>
-<input id="number" name="number" placeholder="number" type="number"/>
-<button type="submit">Generate Songs</button>
-<!-- <p>Song: <input type="text" name="song" value="Song"></p>
-        <input type="submit" value="Submit">
 
-        <p>Artist: <input type="text" name="artist" value="Artist"></p>
-        <input type="submit" value="Submit">
+<form action="/display_songs">
+  <label for="song">Song:</label>
+  <input type="text" id="song" name="song" placeholder="song">
+  <label for="artist">Artist:</label>
+  <input type="text" id="artist" name="artist" placeholder="artist">
+  <label for="number">Number of Songs:</label>
+  <input type="number" id="number" name="number" placeholder="number">
+  <label for="model">Model:</label>
+  <input type="text" id="model" name="model" placeholder="model">
+  <button type="submit">Generate Songs</button>
 
-        <p>Number of songs: <input type="number" name="number" value="Number of songs"></p>
-        <input type="submit" value="Submit"> -->
+
+  <!-- <p>Song: <input type="text" name="song" value="Song"></p>
+  <input type="submit" value="Submit">
+
+  <p>Artist: <input type="text" name="artist" value="Artist"></p>
+  <input type="submit" value="Submit">
+
+  <p>Number of songs: <input type="number" name="number" value="Number of songs"></p>
+  <input type="submit" value="Submit"> -->
+
 </form>
-</div>
-<div id="showcase">
-<p>Your Recommended Songs: </p>
-<div id="content"><iframe allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen="" frameBorder="0" height="352" loading="lazy" src="https://open.spotify.com/embed/track/2kZZq09uK0oR9wwYJvgacb" style="border-radius:12px" width="100%"></iframe><br/><iframe allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen="" frameBorder="0" height="352" loading="lazy" src="https://open.spotify.com/embed/track/4RVtBlHFKj51Ipvpfv5ER4" style="border-radius:12px" width="100%"></iframe><br/><iframe allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen="" frameBorder="0" height="352" loading="lazy" src="https://open.spotify.com/embed/track/2UyWClHKt6fut3IpS2tJiR" style="border-radius:12px" width="100%"></iframe><br/><iframe allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen="" frameBorder="0" height="352" loading="lazy" src="https://open.spotify.com/embed/track/7GBP9vqKB9o9wcQrkblICD" style="border-radius:12px" width="100%"></iframe><br/><iframe allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen="" frameBorder="0" height="352" loading="lazy" src="https://open.spotify.com/embed/track/2nqMzaaRiinfR2B4egiHgI" style="border-radius:12px" width="100%"></iframe><br/></div>
-</div>
-</div>
-</div>
+
 
 
 {% endblock %}

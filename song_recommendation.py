@@ -87,7 +87,7 @@ def find_song(song, artist, data):
 
 
 
-def rec_song(song, kmeans, n, data):
+def rec_song(song, model, n, data):
     artist = song['artists'].iloc[0]
     name = song['name'].iloc[0]
     #display(data2)

@@ -43,10 +43,10 @@ def get_auth_header(token):
     return {"Authorization": "Bearer " + token}
 
 #done
-def get_tracks(song, artist, number):
+def get_tracks(song, artist, number, model):
     token = get_token()
     
-    song_ids = main.main(song, artist, number)
+    song_ids = main.main(song, artist, number, model)
     #url and headers
     url = "https://api.spotify.com/v1/tracks"
     headers = get_auth_header(token)
