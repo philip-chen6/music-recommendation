@@ -17,7 +17,8 @@ def main(song, artist, number):
     data = pd.read_csv('data/data.csv')
 
 #get rid of strings
-    data1 = data.drop(['artists', 'id', 'name', 'release_date'], axis=1)
+    data1 = data.drop(['artists', 'id', 'name', 'release_date', 'year', 'duration_ms', 'explicit', 'popularity'], axis=1)
+
 
 #PCA
 # pca = PCA(n_components = 2)
@@ -74,9 +75,28 @@ def main(song, artist, number):
 
 
 
+    song_data, is_in_dataset = song_recommendation.find_song(song, artist, data)
+    if is_in_dataset == False:
+        print(song_data)
+        artist = song_data['artists'].iloc[0]
+        name = song_data['name'].iloc[0]
+        song_data = song_data.drop(['artists', 'id', 'name', 'duration_ms'  ], axis=1)
+        print(song_data)
+        print("a;lskdfj")
+        song_cluster_label = kmeans.predict(song_data)
+        print(song_cluster_label)
+        song_data['cluster_label'] = song_cluster_label
+        song_data['artists'] = artist
+        song_data['name'] = name
+    else:
+        print(song_data)
+        artist = song_data['artists'].iloc[0]
+        name = song_data['name'].iloc[0]
+        song_data = song_data.drop(['artists', 'id', 'name', 'duration_ms', 'release_date', 'year', 'explicit', 'popularity'], axis=1)
+        song_data['artists'] = artist
+        song_data['name'] = name
 
-
-    song = song_recommendation.find_song(song, artist)
-    song_recs = song_recommendation.rec_song(song, kmeans, number)
+    song_recs = song_recommendation.rec_song(song_data, kmeans, number,data)
+    print("test3")
     return song_recs
     
