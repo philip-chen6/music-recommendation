@@ -1,0 +1,30 @@
+html {
+  font-size: 100%;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Spartan", sans-serif;
+  font-weight: 500;
+  height: 100%;
+  font-size: 12px;
+}
+body.noscroll {
+  overflow: hidden;
+}
+
+#grid-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-content: space-evenly;
+}
+
+#showcase {
+  width: auto;
+}/*# sourceMappingURL=style.css.map */
