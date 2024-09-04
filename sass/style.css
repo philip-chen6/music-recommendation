@@ -1,0 +1,32 @@
+html{
+    font-size: 100%;
+    box-sizing:border-box;
+
+    
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Spartan', sans-serif;
+    font-weight: 500;
+    height: 100%;
+    font-size: 12px;
+    &.noscroll{
+        overflow: hidden;
+    }
+}
+
+
+#grid-container{
+    display:grid;
+    grid-template-columns: 80px 200px auto 40px;
+}
+
+#showcase{
+    width: auto;
+}
