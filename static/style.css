@@ -21,10 +21,27 @@ body.noscroll {
 
 #grid-container {
   display: grid;
+  height: 100%;
   grid-template-columns: 50% 50%;
-  justify-content: space-evenly;
 }
 
 #showcase {
+  height: 800px;
+  overflow: scroll;
+}
+
+.column {
+  padding: 20px;
+  height: 100%;
+}
+
+#input-form {
   width: auto;
+  height: auto;
+  border: 1px solid #000;
+  border-radius: 20px;
+  align-self: center;
+  padding: 20px;
+  padding-bottom: 0;
+  float: center;
 }/*# sourceMappingURL=style.css.map */
