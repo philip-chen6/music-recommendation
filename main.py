@@ -3,7 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.express as px 
 import song_recommendation
-import os
 
 from sklearn.cluster import KMeans
 from sklearn.mixture import GaussianMixture
@@ -54,13 +53,11 @@ def main(song, artist, number, model_choice):
     # plt.show()
     # print(optimal_k)
 
-    #kmeans clustering
+    #kmeans clustering, predict and add column of cluster labels
         model = KMeans(n_clusters=5)
         model.fit(data1)
         song_cluster_labels = model.predict(data1)
         data['cluster_label'] = song_cluster_labels
-
-    #add cluster_label column
 
     #plot clusters
     # projection = pd.DataFrame(columns=['x', 'y'], data=X_reduced)
@@ -70,6 +67,7 @@ def main(song, artist, number, model_choice):
     # fig = px.scatter(
     #     projection, x='x', y='y', color='cluster', hover_data=['x', 'y', 'title', 'artists'])
     # fig.show()
+
     elif model_choice == "GMM":
         # AIC = []
         # BIC = []
@@ -86,7 +84,8 @@ def main(song, artist, number, model_choice):
         model = GaussianMixture(n_components = k).fit(data1)
         song_cluster_labels = model.predict(data1)
         data['cluster_label'] = song_cluster_labels
-        
+
+    #get individual song data and if its in the dataset    
     song_data, is_in_dataset = song_recommendation.find_song(song, artist, data)
     if is_in_dataset == False:
         # artist = song_data['artists'].iloc[0]
