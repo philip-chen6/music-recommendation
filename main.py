@@ -85,8 +85,9 @@ def main(song, artist, number, model_choice):
         song_cluster_labels = model.predict(data1)
         data['cluster_label'] = song_cluster_labels
 
-    #get individual song data and if its in the dataset    
-    song_data, is_in_dataset = song_recommendation.find_song(song, artist, data)
+    #get individual song data and if its in the dataset   
+    #COME HERE
+    song_data, is_in_dataset, genres = song_recommendation.find_song(song, artist, data)
     if is_in_dataset == False:
         # artist = song_data['artists'].iloc[0]
         # name = song_data['name'].iloc[0]
@@ -114,7 +115,7 @@ def main(song, artist, number, model_choice):
         song_data['artists'] = artist
         song_data['name'] = name
 
-    song_recs = song_recommendation.rec_song(song_data, model, number,data)
+    song_recs = song_recommendation.rec_song(song_data, model, number,data, genres)
 
     return song_recs
     

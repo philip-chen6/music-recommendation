@@ -7,13 +7,16 @@ from sklearn.metrics.pairwise import euclidean_distances
 
 
 def find_song(song, artist, data):
-
+    genres = spotify.get_artist_genres(artist)
+    #genre = genres[0]
+    #print(genre)
     song1 = data[(data['name']==song)]
     artist1 = song1[(song1['artists'].str.contains(artist, regex = False))]
     print(artist1.shape[0])
     #checks if artist exists in data
     if artist1.shape[0] != 0:
-        return data[(data['name'] == song) & (data['artists'].str.contains(artist, regex = False))], True
+        #get artist genre
+        return data[(data['name'] == song) & (data['artists'].str.contains(artist, regex = False))], True, genres
     
     else: 
         song_result = spotify.search_for_song(song, artist)
@@ -58,7 +61,7 @@ def find_song(song, artist, data):
         new_song_data['name'] = song
         new_song_data['speechiness'] = speechiness
         new_song_data['tempo'] = tempo
-        return new_song_data, False
+        return new_song_data, False, genres
 
 
         
@@ -66,7 +69,7 @@ def find_song(song, artist, data):
 
 
 
-def rec_song(song, model, n, data):
+def rec_song(song, model, n, data, genres):
     artist = song['artists'].iloc[0]
     name = song['name'].iloc[0]
     #display(data2)
@@ -95,12 +98,30 @@ def rec_song(song, model, n, data):
 
     # Find the ids of the closest n points
     song_ids = ""
-    for i in range(0, n):
+    #i is number of songs added to song list so far, n is how many we want
+    i = 0
+    while i != n:
       closest_point_index = np.argmin(distances[cluster_points2.index])
       distances = np.delete(distances, closest_point_index)
       cluster_points2 = cluster_points2.drop(closest_point_index, axis=0)
       cluster_points2 = cluster_points2.reset_index(drop = True)
-      song_ids += cluster_points.iloc[closest_point_index]['id'] + ","
+      print("test")
+      artist_genres = spotify.get_artist_genres(cluster_points.iloc[closest_point_index]['artists'].split(",")[0])
+      print("test2")
+    #   print(artist_genres)
+    #   if len(artist_genres) >= 1:
+    #      first_genre = artist_genres[0]
+    #   else:
+    #      first_genre = ""
+    #   print(first_genre)
+      for elem in artist_genres:
+        print("cluster genre: " + elem)
+        if elem in genres:
+            print("yasss")
+            song_ids += cluster_points.iloc[closest_point_index]['id'] + ","
+            i += 1
+            break
+
 
     return song_ids
     

@@ -54,6 +54,7 @@ def get_tracks(song, artist, number, model):
     query_url  = url + query
     #get method to get info
     result = get(query_url, headers=headers)
+    print(result)
     json_result = json.loads(result.content)["tracks"]
     return json_result
 
@@ -62,7 +63,7 @@ def search_for_song(song, artist):
     url = "https://api.spotify.com/v1/search"
     headers = get_auth_header(token)
     query = f"?q={song}{artist}&type=track&limit=1"
-
+    
     query_url = url + query
     result = get(query_url, headers=headers)
     json_result = json.loads(result.content)
@@ -77,6 +78,29 @@ def get_audio_features(song_id):
     data = pd.DataFrame([json_result])
     return data
 
+# def get_artist_genre(artist_id):
+#     token = get_token()
+#     headers = get_auth_header(token)
+#     query_url = f"https://api.spotify.com/v1/artists/{artist_id}"
+#     result = get(query_url, headers = headers)
+#     json_result = json.loads(result.content)
+#     genres = json_result.get("genres")
+#     return genres
+
+def get_artist_genres(artist):
+    token = get_token()
+    url = "https://api.spotify.com/v1/search"
+    headers = get_auth_header(token)
+    query = f"?q={artist}&type=artist&limit=1"
+
+    query_url = url + query
+    result = get(query_url, headers=headers)
+    json_result = json.loads(result.content)
+    genres = json_result.get("artists").get("items")[0].get("genres")
+    return(genres)
+
+
+#print(get_artist_genre("0TnOYISbd1XYRBk9myaseg"))
 #in progress
 # def create_playlists(token, tracks):
 #     #url and headers

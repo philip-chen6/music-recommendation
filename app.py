@@ -21,7 +21,7 @@ def render_input_songs():
       number = int(request.form['number'])
       model = request.form['model']
 
-   
+      print("song")
       tracks = spotify.get_tracks(song, artist, number, model)
       urls = []
       names = []
